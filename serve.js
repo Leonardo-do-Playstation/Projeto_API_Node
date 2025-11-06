@@ -5,6 +5,14 @@ import mongoose from 'mongoose';
 const app = express();
 app.use(express.json());
 
+app.use(cors({
+    origin: 'http://localhost:4200',
+    methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+    allowesHeaders: ['Content-type','Authorization'],
+    credentials: false
+}));
+
+
 mongoose.connect(process.env.MONGODB_URI, { dbName: 'aulas' })
     .then(() => console.log('Conectado ao MongoDB'))
     .catch(err => console.error('Erro de conexão', err.message))
